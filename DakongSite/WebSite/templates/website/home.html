@@ -6,16 +6,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <!-- Toolbar with language switcher -->
-            <ul>
-                <li><a href="?language=en">English</a></li>
-                <li><a href="?language=zh">Chinese</a></li>
-                <li><a href="?language=tr">Turkish</a></li>
-            </ul>
-        </nav>
-    </header>
+    {% include 'website/toolbar.html' with toolbar_items=toolbar_items current_language=current_language %}
     <main>
         <!-- Homepage Content -->
         <h1>{{ homepage_content.headline }}</h1>

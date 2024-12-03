@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolbar</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Toolbar with dynamic language switcher and navigation links -->
+            <ul>
+                {% for item in toolbar_items %}
+                    {{ item.to_html|safe }}
+                {% endfor %}
+            </ul>
+            <ul class="language-switch">
+                <li>Current Language: {{ current_language }}</li>
+                <li><a href="?language=en">English</a></li>
+                <li><a href="?language=zh">Chinese</a></li>
+                <li><a href="?language=tr">Turkish</a></li>
+                <li><a href="?language=es">Spanish</a></li>
+                <li><a href="?language=fr">French</a></li>
+            </ul>
+        </nav>
+    </header>
+        <nav>
+            <!-- Toolbar with dynamic language switcher and navigation links -->
+            <ul>
+                {% for item in toolbar_items %}
+                    {{ item.to_html|safe }}
+                {% endfor %}
+            </ul>
+            <ul class="language-switch">
+                <li>Current Language: {{ current_language }}</li>
+                <li><a href="?language=en">English</a></li>
+                <li><a href="?language=zh">Chinese</a></li>
+                <li><a href="?language=tr">Turkish</a></li>
+                <li><a href="?language=es">Spanish</a></li>
+                <li><a href="?language=fr">French</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>
