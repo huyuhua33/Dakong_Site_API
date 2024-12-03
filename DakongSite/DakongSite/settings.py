@@ -24,6 +24,7 @@ BASE_DIR = os.path.join('','/')
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 load_dotenv(env_path)
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -40,13 +41,21 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
+# Installed apps
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'parler',  # For multilingual support
+    'rest_framework',  # For API support
+    'WebSite',
+    'Accounts',
+    'News',
+    'Products',
+    'Media',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +93,10 @@ WSGI_APPLICATION = "DakongSite.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-
+    "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR,"db.sqlite3"),
+        }
 }
 
 '''
@@ -116,13 +128,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
 
-USE_I18N = True
+# USE_I18N = True
 
-USE_TZ = True
+# USE_TZ = True
+
+# Language settings
+LANGUAGES = [
+    ('en', 'English'),
+    ('zh', 'Chinese'),
+    ('tr', 'Turkish'),
+    # Additional languages can be added dynamically
+]
+
+PARLER_DEFAULT_LANGUAGE_CODE = 'en'
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'zh'},
+        {'code': 'tr'},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+    }
+}
 
 
 # Static files (CSS, JavaScript, Images)

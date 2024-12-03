@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Library</title>
+</head>
+<body>
+    <h2>Media Library</h2>
+    <ul>
+        {% for media_file in media_files %}
+        <li>
+            <a href="{{ media_file.file.url }}">{{ media_file.file.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

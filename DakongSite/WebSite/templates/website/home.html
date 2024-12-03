@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Toolbar with language switcher -->
+            <ul>
+                <li><a href="?language=en">English</a></li>
+                <li><a href="?language=zh">Chinese</a></li>
+                <li><a href="?language=tr">Turkish</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Homepage Content -->
+        <h1>{{ homepage_content.headline }}</h1>
+        <p>{{ homepage_content.subheadline }}</p>
+        <img src="{{ homepage_content.promotional_image.url }}" alt="Promotional Image">
+        
+        <!-- Latest News -->
+        <section>
+            <h2>Latest News</h2>
+            <ul>
+                {% for article in latest_news %}
+                <li>
+                    <a href="/news/{{ article.pk }}/">{{ article.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Featured Products -->
+        <section>
+            <h2>Featured Products</h2>
+            <ul>
+                {% for product in featured_products %}
+                <li>
+                    <a href="/products/{{ product.pk }}/">{{ product.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>
