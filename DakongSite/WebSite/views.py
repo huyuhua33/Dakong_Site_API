@@ -25,4 +25,23 @@ def homepage(request):
     }
     return render(request, 'website/home.html', context)
 
+from django.http import JsonResponse
+from django.utils.translation import activate
+from .models import PageContent
+
+def get_language_content(request, lang_code):
+    activate(lang_code)
+    content = PageContent.objects.all()
+    data = [
+        {
+            "slug": item.slug,
+            "title": item.safe_translation_getter('title', ''),
+            "description": item.safe_translation_getter('description', '')
+        }
+        for item in content
+    ]
+    return JsonResponse({"language": lang_code, "content": data})
+
+
 logger.info("Homepage view loaded successfully.")
+

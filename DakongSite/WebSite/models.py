@@ -13,3 +13,14 @@ class HomePageContent(TranslatableModel):
 
     def __str__(self):
         return self.safe_translation_getter('headline', any_language=True)
+    
+
+class PageContent(TranslatableModel):
+    slug = models.SlugField(unique=True)
+    translations = TranslatedFields(
+        title=models.CharField(max_length=200),
+        description=models.TextField()
+    )
+
+    def __str__(self):
+        return self.safe_translation_getter('title', any_language=True)
