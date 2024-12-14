@@ -7,43 +7,52 @@ from parler.models import TranslatableModel, TranslatedFields
 from django.db import models
 from parler.models import TranslatableModel, TranslatedFields
 
-# HomePageContent model to store homepage information
 class HomePageContent(TranslatableModel):
     translations = TranslatedFields(
         headline=models.CharField(max_length=200),  # Title of the homepage section
         subheadline=models.TextField(),  # Subtitle or detailed description
+        headline=models.CharField(max_length=200),  # Title of the homepage section
+        subheadline=models.TextField(),  # Subtitle or detailed description
     )
-    promotional_image = models.ImageField(upload_to='homepage/')  # Image for promotional purposes
+    promotional_image = models.ImageField(upload_to='homepage/')  # Image for promotional purposes  # Image for promotional purposes
 
     def __str__(self):
         return self.safe_translation_getter('headline', any_language=True)
 
-
-# Toolbar model to manage toolbar links and labels
-class Toolbar(TranslatableModel):
-    APP_LINKS = {
-        'home': '/',
-        'news': '/news/',
-        'products': '/products/',
-        'media': '/media/library/',
-        'account': '/account/login/',
-    }
+class PageContent(TranslatableModel):
+    slug = models.SlugField(unique=True)
     translations = TranslatedFields(
-        label=models.CharField(max_length=100),  # Label for the toolbar link
+        title=models.CharField(max_length=200),
+        description=models.TextField()
     )
-    link = models.CharField(max_length=100, choices=[(key, key.capitalize()) for key in Toolbar.APP_LINKS.keys()])  # URL link for the toolbar item
-    order = models.PositiveIntegerField(default=0)  # Order of the toolbar item
-
-    class Meta:
-        ordering = ['order']  # Ensure toolbar items are displayed in the specified order
 
     def __str__(self):
-        return self.safe_translation_getter('label', any_language=True)
+        return self.safe_translation_getter('title', any_language=True)
 
-    # Method to render toolbar links in HTML
-    def to_html(self):
-        link_url = self.APP_LINKS.get(self.link, self.link)
-        return f'<li><a href="{link_url}">{self.safe_translation_getter("label", any_language=True)}</a></li>'
+class MediaFile(models.Model):
+    name = models.CharField(max_length=100)
+    file = models.FileField(upload_to='uploads/')  # For any file type
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
 
 
+class ToolbarItem(TranslatableModel):
+    
+    translations = TranslatedFields(
+        name=models.CharField(max_length=100),  # 多語顯示名稱
+    )
+    link = models.CharField(max_length=255)  # 鏈接地址
+    is_visible = models.BooleanField(default=True)  # 是否顯示
+    position = models.PositiveIntegerField(default=0,unique=True)  # 順序排序
 
+    def save(self, *args, **kwargs):
+        if self.position is None:
+            # 自動設置 position 為當前最大值 + 1
+            max_position = ToolbarItem.objects.aggregate(models.Max('position'))['position__max'] or 0
+            self.position = max_position + 1
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.safe_translation_getter('name', any_language=True)

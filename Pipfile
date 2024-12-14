@@ -9,6 +9,10 @@ django-parler = "*"
 python-dotenv = "*"
 djangorestframework = "*"
 pillow = "*"
+drf-yasg = "*"
+django-parler-rest = "*"
+django-filter = "*"
+django-extensions = "*"
 
 [dev-packages]
 

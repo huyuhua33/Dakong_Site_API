@@ -17,8 +17,8 @@ import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.join('','/')
+BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = os.path.join('','/')
 
 # Load Global env
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
@@ -49,8 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions', # ADD for extra djang cmd
+    'django_filters', # ADD for default form 
     'parler',  # For multilingual support
-    'rest_framework',  # For API support
+    'rest_framework',  # For RESTful API support
+    'drf_yasg', # For Swagger support
+    'corsheaders', # For CORS support
     'WebSite',
     'Accounts',
     'News',
@@ -61,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware', # CROS midware support 
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -95,7 +100,7 @@ WSGI_APPLICATION = "DakongSite.wsgi.application"
 DATABASES = {
     "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR,"db.sqlite3"),
+            "NAME": BASE_DIR / "db.sqlite3",
         }
 }
 
@@ -157,13 +162,32 @@ PARLER_LANGUAGES = {
     }
 }
 
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'uploads' / 'media' 
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CROS Source
+if(DEBUG):
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  # Vue 開發伺服器的 URL
+    'http://127.0.0.1:5173',
+    ]
+    CORS_ALLOW_CREDENTIALS = True
