@@ -25,11 +25,11 @@ urlpatterns = [
 
 # add appliaction
 urlpatterns += [
-    path('', include('WebSite.urls')),
-    path('account/', include('Accounts.urls')),
-    path('news/', include('News.urls')),
-    path('products/', include('Products.urls')),
-    path('media/', include('Media.urls')),
+    path('api/website/', include('WebSite.urls')),
+    path('api/account/', include('Accounts.urls')),
+    path('api/news/', include('News.urls')),
+    path('api/products/', include('Products.urls')),
+    path('api/media/', include('Media.urls')),
 ]
 
 # # Add URL maps to redirect the base URL to our application
@@ -43,3 +43,25 @@ if(settings.DEBUG):
     
     from django.conf.urls.static import static
     urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
+    from drf_yasg.views import get_schema_view
+
+# TODO edit
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework.permissions import AllowAny
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="WebSite API",
+        default_version="v1",
+        description="API documentation for WebSite application",
+    ),
+    public=True,
+    permission_classes=(AllowAny,),
+)
+
+urlpatterns += [
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+]

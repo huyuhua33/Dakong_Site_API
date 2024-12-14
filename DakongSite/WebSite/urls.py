@@ -1,20 +1,27 @@
 # WebSite/urls.py
-from django.urls import path
+from django.urls import path,include
 from . import views
 import logging
+from django.conf import settings
+from rest_framework.routers import DefaultRouter
+
 
 logger = logging.getLogger(__name__)
 
+router = DefaultRouter()
+router.register(r'toolbar-items', views.ToolbarItemViewSet)
+
 urlpatterns = [
-    path('', views.homepage, name='home'),
+    path('', include(router.urls)),
 ]
 
 # from django.urls import path
 # from . import views
 
-urlpatterns = [
-    path('api/language/<str:lang_code>/', views.get_language_content, name='get_language_content'),
-]
+
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 logger.info("WebSite URLs configured successfully.")
