@@ -7,17 +7,6 @@ from parler.models import TranslatableModel, TranslatedFields
 from django.db import models
 from parler.models import TranslatableModel, TranslatedFields
 
-class HomePageContent(TranslatableModel):
-    translations = TranslatedFields(
-        headline=models.CharField(max_length=200),  # Title of the homepage section
-        subheadline=models.TextField(),  # Subtitle or detailed description
-        headline=models.CharField(max_length=200),  # Title of the homepage section
-        subheadline=models.TextField(),  # Subtitle or detailed description
-    )
-    promotional_image = models.ImageField(upload_to='homepage/')  # Image for promotional purposes  # Image for promotional purposes
-
-    def __str__(self):
-        return self.safe_translation_getter('headline', any_language=True)
 
 class PageContent(TranslatableModel):
     slug = models.SlugField(unique=True)

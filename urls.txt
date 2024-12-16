@@ -1,0 +1,79 @@
+/admin/	django.contrib.admin.sites.index	admin:index
+/admin/<app_label>/	django.contrib.admin.sites.app_index	admin:app_list
+/admin/<url>	django.contrib.admin.sites.catch_all_view
+/admin/News/application/	django.contrib.admin.options.changelist_view	admin:News_application_changelist
+/admin/News/application/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/News/application/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:News_application_change
+/admin/News/application/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:News_application_delete
+/admin/News/application/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:News_application_history
+/admin/News/application/<var>/change/delete-translation/admin/News/application/(.)/change/delete-translation/<var>/	parler.admin.delete_translation	admin:News_application_delete_translation
+/admin/News/application/add/	django.contrib.admin.options.add_view	admin:News_application_add
+/admin/News/news/	django.contrib.admin.options.changelist_view	admin:News_news_changelist
+/admin/News/news/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/News/news/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:News_news_change
+/admin/News/news/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:News_news_delete
+/admin/News/news/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:News_news_history
+/admin/News/news/<var>/change/delete-translation/admin/News/news/(.)/change/delete-translation/<var>/	parler.admin.delete_translation	admin:News_news_delete_translation
+/admin/News/news/add/	django.contrib.admin.options.add_view	admin:News_news_add
+/admin/WebSite/mediafile/	django.contrib.admin.options.changelist_view	admin:WebSite_mediafile_changelist
+/admin/WebSite/mediafile/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/WebSite/mediafile/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:WebSite_mediafile_change
+/admin/WebSite/mediafile/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:WebSite_mediafile_delete
+/admin/WebSite/mediafile/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:WebSite_mediafile_history
+/admin/WebSite/mediafile/add/	django.contrib.admin.options.add_view	admin:WebSite_mediafile_add
+/admin/WebSite/pagecontent/	django.contrib.admin.options.changelist_view	admin:WebSite_pagecontent_changelist
+/admin/WebSite/pagecontent/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/WebSite/pagecontent/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:WebSite_pagecontent_change
+/admin/WebSite/pagecontent/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:WebSite_pagecontent_delete
+/admin/WebSite/pagecontent/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:WebSite_pagecontent_history
+/admin/WebSite/pagecontent/<var>/change/delete-translation/admin/WebSite/pagecontent/(.)/change/delete-translation/<var>/	parler.admin.delete_translation	admin:WebSite_pagecontent_delete_translation
+/admin/WebSite/pagecontent/add/	django.contrib.admin.options.add_view	admin:WebSite_pagecontent_add
+/admin/WebSite/toolbaritem/	django.contrib.admin.options.changelist_view	admin:WebSite_toolbaritem_changelist
+/admin/WebSite/toolbaritem/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/WebSite/toolbaritem/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:WebSite_toolbaritem_change
+/admin/WebSite/toolbaritem/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:WebSite_toolbaritem_delete
+/admin/WebSite/toolbaritem/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:WebSite_toolbaritem_history
+/admin/WebSite/toolbaritem/<var>/change/delete-translation/admin/WebSite/toolbaritem/(.)/change/delete-translation/<var>/	parler.admin.delete_translation	admin:WebSite_toolbaritem_delete_translation
+/admin/WebSite/toolbaritem/add/	django.contrib.admin.options.add_view	admin:WebSite_toolbaritem_add
+/admin/auth/group/	django.contrib.admin.options.changelist_view	admin:auth_group_changelist
+/admin/auth/group/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/auth/group/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:auth_group_change
+/admin/auth/group/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:auth_group_delete
+/admin/auth/group/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:auth_group_history
+/admin/auth/group/add/	django.contrib.admin.options.add_view	admin:auth_group_add
+/admin/auth/user/	django.contrib.admin.options.changelist_view	admin:auth_user_changelist
+/admin/auth/user/<id>/password/	django.contrib.auth.admin.user_change_password	admin:auth_user_password_change
+/admin/auth/user/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/auth/user/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:auth_user_change
+/admin/auth/user/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:auth_user_delete
+/admin/auth/user/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:auth_user_history
+/admin/auth/user/add/	django.contrib.auth.admin.add_view	admin:auth_user_add
+/admin/autocomplete/	django.contrib.admin.sites.autocomplete_view	admin:autocomplete
+/admin/jsi18n/	django.contrib.admin.sites.i18n_javascript	admin:jsi18n
+/admin/login/	django.contrib.admin.sites.login	admin:login
+/admin/logout/	django.contrib.admin.sites.logout	admin:logout
+/admin/password_change/	django.contrib.admin.sites.password_change	admin:password_change
+/admin/password_change/done/	django.contrib.admin.sites.password_change_done	admin:password_change_done
+/admin/r/<int:content_type_id>/<path:object_id>/	django.contrib.contenttypes.views.shortcut	admin:view_on_site
+/api/account/login/	django.contrib.auth.views.LoginView	login
+/api/account/logout/	django.contrib.auth.views.LogoutView	logout
+/api/account/signup/	Accounts.views.SignUpView	signup
+/api/media/library/	Media.views.MediaLibraryView	media_library
+/api/media/upload/	Media.views.MediaUploadView	media_upload
+/api/news/	rest_framework.routers.APIRootView	api-root
+/api/news/<drf_format_suffix:format>	rest_framework.routers.APIRootView	api-root
+/api/news/news/	News.views.NewsViewSet	news-list
+/api/news/news/<pk>/	News.views.NewsViewSet	news-detail
+/api/news/news/<pk>\.<format>/	News.views.NewsViewSet	news-detail
+/api/news/news\.<format>/	News.views.NewsViewSet	news-list
+/api/products/	Products.views.ProductListView	product_list
+/api/products/<int:pk>/	Products.views.ProductDetailView	product_detail
+/api/website/	rest_framework.routers.APIRootView	api-root
+/api/website/<drf_format_suffix:format>	rest_framework.routers.APIRootView	api-root
+/api/website/toolbar-items/	WebSite.views.ToolbarItemViewSet	toolbaritem-list
+/api/website/toolbar-items/<pk>/	WebSite.views.ToolbarItemViewSet	toolbaritem-detail
+/api/website/toolbar-items/<pk>\.<format>/	WebSite.views.ToolbarItemViewSet	toolbaritem-detail
+/api/website/toolbar-items\.<format>/	WebSite.views.ToolbarItemViewSet	toolbaritem-list
+/redoc/	drf_yasg.views.SchemaView	schema-redoc
+/static/<path>	django.views.static.serve
+/swagger/	drf_yasg.views.SchemaView	schema-swagger-ui

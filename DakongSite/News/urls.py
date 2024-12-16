@@ -1,14 +1,12 @@
 # News/urls.py
 # URL configuration for news related views
-from django.urls import path
-from . import views
-import logging
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import NewsViewSet
 
-logger = logging.getLogger(__name__)
+router = DefaultRouter()
+router.register(r'news', NewsViewSet)
 
 urlpatterns = [
-    path('', views.ArticleListView.as_view(), name='article_list'),
-    path('<int:pk>/', views.ArticleDetailView.as_view(), name='article_detail'),
+    path('', include(router.urls)),
 ]
-
-logger.info("News URLs configured successfully.")
