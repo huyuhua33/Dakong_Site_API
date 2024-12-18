@@ -11,7 +11,7 @@ from .models import News
 from .serializers import NewsSerializer
 
 class NewsViewSet(ModelViewSet):
-    # queryset = News.objects.prefetch_related('applications')  # Optimize queries
+    queryset = News.objects.all().order_by('-published_at')
     serializer_class = NewsSerializer
 
 

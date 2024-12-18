@@ -20,18 +20,19 @@ from parler.models import TranslatableModel, TranslatedFields
 #     def __str__(self):
 #         return self.safe_translation_getter('name', any_language=True)
 
+from ckeditor.fields import RichTextField
+
 class News(TranslatableModel):
     """
-    News model, linked to applications or features.
+    新聞模型，支持富文本編輯。
     """
     translations = TranslatedFields(
-        title=models.CharField(max_length=255),  # News title
-        content=models.TextField(),  # News content
+        title=models.CharField(max_length=255),  # 新聞標題
+        content=RichTextField(),  # 使用 CKEditor 的富文本字段
     )
+    image = models.ImageField(upload_to='news_images/', blank=True, null=True)  # 圖片字段
     published_at = models.DateTimeField(auto_now_add=True)
-    # applications = models.ManyToManyField(Application, related_name="news", blank=True)
 
     def __str__(self):
         return self.safe_translation_getter('title', any_language=True)
-
 logger.info("Article model loaded successfully.")

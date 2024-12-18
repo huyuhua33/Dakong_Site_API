@@ -13,6 +13,7 @@ drf-yasg = "*"
 django-parler-rest = "*"
 django-filter = "*"
 django-extensions = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 

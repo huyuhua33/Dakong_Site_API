@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django_filters', # ADD for default form 
     'parler',  # For multilingual support
     'rest_framework',  # For RESTful API support
+    'ckeditor', # For RichText support
+    'ckeditor_uploader',  # For RichText support picture
     'drf_yasg', # For Swagger support
     'corsheaders', # For CORS support
     'WebSite',
@@ -170,11 +172,13 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = BASE_DIR / 'uploads' / 'media' 
+
+CKEDITOR_UPLOAD_PATH = BASE_DIR / 'uploads' / 'CKEditor'  # 圖片上傳路徑
 
 
 # Default primary key field type
