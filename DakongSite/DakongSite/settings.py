@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'DakongSite.middleware.RedirectUnmatchedURLMiddleware', # For extra tool
 ]
 
 ROOT_URLCONF = "DakongSite.urls"
