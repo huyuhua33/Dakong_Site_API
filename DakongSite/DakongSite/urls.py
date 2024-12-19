@@ -32,6 +32,11 @@ urlpatterns += [
     path('api/media/', include('Media.urls')),
 ]
 
+from django.conf.urls.static import static
+# 開發環境下服務媒體檔案
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
 # # Add URL maps to redirect the base URL to our application
 # from django.views.generic import RedirectView
 # urlpatterns += [

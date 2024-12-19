@@ -2,11 +2,13 @@ from django.contrib import admin
 from parler.admin import TranslatableAdmin
 from .models import News
 
-# @admin.register(Application)
-# class ApplicationAdmin(TranslatableAdmin):
-#     list_display = ('name', 'created_at')
-
 @admin.register(News)
 class NewsAdmin(TranslatableAdmin):
     list_display = ('title', 'published_at')
-    # filter_horizontal = ('applications',)  # Enable multi-select for applications
+    search_fields = ('translations__title',)
+    list_filter = ('published_at',)
+
+    # 選擇性展示相關評論，僅供參考
+    def comments_count(self, obj):
+        return obj.comments.count()
+    comments_count.short_description = 'Comments Count'

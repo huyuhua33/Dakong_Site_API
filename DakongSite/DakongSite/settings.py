@@ -73,7 +73,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'DakongSite.middleware.RedirectUnmatchedURLMiddleware', # For extra tool
+    # 'DakongSite.middleware.RedirectUnmatchedURLMiddleware', # For extra tool
 ]
 
 ROOT_URLCONF = "DakongSite.urls"
@@ -179,7 +179,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads' / 'media' 
 
-CKEDITOR_UPLOAD_PATH = BASE_DIR / 'uploads' / 'CKEditor'  # 圖片上傳路徑
+CKEDITOR_UPLOAD_PATH = 'CKEditor'  # 圖片上傳路徑
 
 
 # Default primary key field type
