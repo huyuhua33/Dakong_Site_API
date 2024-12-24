@@ -1,42 +1,35 @@
 # # Account App
-# # Account/models.py (Extending the User Model)
-# from django.contrib.auth.models import AbstractUser
-# from django.db import models
-# import logging
 
-# logger = logging.getLogger(__name__)
-
-# class CustomUser(AbstractUser):
-#     phone_number = models.CharField(max_length=15, blank=True, null=True)
-#     address = models.TextField(blank=True, null=True)
-
-#     def __str__(self):
-#         return self.username
-
-# logger.info("CustomUser model loaded successfully.")
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from parler.models import TranslatableModel, TranslatedFields
 import logging
 
 logger = logging.getLogger(__name__)
 
-class CustomUser(AbstractUser):
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
 
-    # Add related_name to avoid reverse accessor clash
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='customuser_groups',
-        blank=True
+
+class User(AbstractUser, TranslatableModel):
+    """
+    自定義用戶模型，支持多語言姓名。
+    """
+    translations = TranslatedFields(
+        display_name=models.CharField(max_length=255, blank=True, null=True),  # 用戶顯示名稱
     )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='customuser_user_permissions',
-        blank=True
+    role = models.CharField(
+        max_length=50,
+        choices=[
+            ('user', 'User'),
+            ('admin', 'Admin'),
+            ('guest', 'Guest'),
+        ],
+        default='user',
     )
+    phone = models.CharField(max_length=15, blank=True, null=True)  # 電話號碼
+    address = models.TextField(blank=True, null=True)  # 用戶地址
 
     def __str__(self):
-        return self.username
+        return self.safe_translation_getter('display_name', default=self.username)
+
 
 logger.info("CustomUser model loaded successfully.")
