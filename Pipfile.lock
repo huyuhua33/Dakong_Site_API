@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dd8bc4e3f20e70b33360d591c0f98a04346004c7c5be9983b3b3f365bde90b2f"
+            "sha256": "c86da8f93a1d7809fc955c65da07cc35a710fd80e7a9d08e9bd98ff1156c2c11"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -27,12 +27,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:236e023f021f5ce7dee5779de7b286565fdea5f4ab86bae5338e3f7b69896cf0",
-                "sha256:de450c09e91879fa5a307f696e57c851955c910a438a35e6b4c895e86bedc82a"
+                "sha256:3a93350214ba25f178d4045c0786c61573e7dbfa3c509b3551374f1e11ba8de0",
+                "sha256:6b56d834cc94c8b21a8f4e775064896be3b4a4ca387f2612d4406a5927cd2fdc"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.10'",
-            "version": "==5.1.4"
+            "markers": "python_version >= '3.8'",
+            "version": "==4.2.17"
         },
         "django-ckeditor": {
             "hashes": [
@@ -42,6 +42,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==6.7.2"
+        },
+        "django-ckeditor-5": {
+            "hashes": [
+                "sha256:587f0485a3dca6a1a7c7c68e4160770e46389b8cf50205bf352bd47fcb63567c",
+                "sha256:71980998d4bef7b272e50cb6878cca5c0bedec42b389a3827ffe1bbb88babd29"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==0.2.15"
         },
         "django-extensions": {
             "hashes": [
@@ -63,11 +72,11 @@
         },
         "django-js-asset": {
             "hashes": [
-                "sha256:0b7ee73c45ca65cccbcc2f60cbe8fbc87ff133b543c282cb64fe6c13d7ca4c10",
-                "sha256:5ad51814edf38d28e6280e6ecad50ee40551363a2f6a6bfe93577dee793dc378"
+                "sha256:0c57a82cae2317e83951d956110ce847f58ff0cdc24e314dbc18b35033917e94",
+                "sha256:7ef3e858e13d06f10799b56eea62b1e76706f42cf4e709be4e13356bc0ae30d8"
             ],
-            "markers": "python_version >= '3.10'",
-            "version": "==3.0.1"
+            "markers": "python_version >= '3.8'",
+            "version": "==2.2.0"
         },
         "django-parler": {
             "hashes": [

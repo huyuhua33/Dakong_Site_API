@@ -15,6 +15,7 @@ django-filter = "*"
 django-extensions = "*"
 django-ckeditor = "*"
 djangorestframework-simplejwt = "*"
+django-ckeditor-5 = "*"
 
 [dev-packages]
 

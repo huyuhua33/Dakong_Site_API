@@ -135,6 +135,27 @@ AUTH_PASSWORD_VALIDATORS = [
 # User Auth
 AUTH_USER_MODEL = 'Accounts.User'
 
+# JWT使用
+# JWT 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT 認證
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # 默認要求身份驗證
+    ),
+}
+
+# JWT 配置
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # 訪問令牌有效期
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  # 刷新令牌有效期
+    'ROTATE_REFRESH_TOKENS': True,  # 刷新令牌時是否生成新令牌
+    'BLACKLIST_AFTER_ROTATION': True,  # 刷新後令牌是否失效
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

@@ -1,13 +1,26 @@
 from rest_framework import serializers
-from .models import User
+from .models import RoleHierarchy,User
+
+# Serializers
+class RoleHierarchySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoleHierarchy
+        fields = ['id', 'role', 'level']
 
 class UserSerializer(serializers.ModelSerializer):
-    display_name = serializers.SerializerMethodField()
+    role_display = serializers.SerializerMethodField()
+    role_ids = serializers.PrimaryKeyRelatedField(queryset=RoleHierarchy.objects.all(), many=True, source='roles')
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'display_name', 'role', 'phone', 'address']
+        fields = ['id', 'username', 'email', 'role_ids', 'role_display', 'phone', 'address']
 
-    def get_display_name(self, obj):
-        language_code = self.context.get('language_code', 'en')
-        return obj.safe_translation_getter('display_name', language_code=language_code)
+    def get_role_display(self, obj):
+        return ', '.join([role.role for role in obj.roles.all()])
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    role_ids = serializers.PrimaryKeyRelatedField(queryset=RoleHierarchy.objects.all(), many=True, source='roles')
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role_ids', 'phone', 'address', 'date_joined', 'last_login']

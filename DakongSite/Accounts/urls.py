@@ -1,16 +1,19 @@
-# Account/urls.py
-# URL configuration for account related views (login, logout, signup)
-from django.urls import path
-from django.contrib.auth import views as auth_views
-from . import views
+
+from rest_framework.routers import DefaultRouter
+from django.urls import path, include
+from .views import UserViewSet,RoleHierarchyViewSet
 import logging
 
 logger = logging.getLogger(__name__)
 
+# URLs
+
+router = DefaultRouter()
+router.register(r'users', UserViewSet, basename='user')
+router.register(r'roles', RoleHierarchyViewSet, basename='role')
+
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(template_name='account/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('signup/', views.SignUpView.as_view(), name='signup'),
+    path('', include(router.urls)),
 ]
 
 logger.info("Account URLs configured successfully.")

@@ -43,11 +43,11 @@ if settings.DEBUG:
 #     path('', RedirectView.as_view(url='/catalog/', permanent=True)),
 # ]
 
-if(settings.DEBUG):
-    # Use static() to add url mapping to serve static files during development (only)
+# if(settings.DEBUG):
+#     # Use static() to add url mapping to serve static files during development (only)
     
-    from django.conf.urls.static import static
-    urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     from django.conf.urls.static import static
+#     urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     
     from drf_yasg.views import get_schema_view
 
@@ -69,4 +69,19 @@ schema_view = get_schema_view(
 urlpatterns += [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+]
+
+# JWT setting 
+from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
+urlpatterns += [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # 獲取訪問和刷新令牌
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # 刷新令牌
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),  # 驗證令牌
+    path('api/accounts/', include('Accounts.urls')),  # 用戶管理相關路由
 ]
