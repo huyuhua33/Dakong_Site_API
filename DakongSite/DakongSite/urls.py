@@ -26,7 +26,7 @@ urlpatterns = [
 # add appliaction
 urlpatterns += [
     path('api/website/', include('WebSite.urls')),
-    path('api/account/', include('Accounts.urls')),
+    # path('api/account/', include('Accounts.urls')),
     path('api/news/', include('News.urls')),
     path('api/products/', include('Products.urls')),
     path('api/media/', include('Media.urls')),
