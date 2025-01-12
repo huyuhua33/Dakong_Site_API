@@ -11,6 +11,6 @@ class ProductViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     
 class ProductImageViewSet(ModelViewSet):
-    queryset = ProductImage.objects.all()
+    queryset = Product.objects.prefetch_related('translations').all()
     serializer_class = ProductImageSerializer
     permission_classes = [IsAuthenticated]
