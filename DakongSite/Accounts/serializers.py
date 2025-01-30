@@ -3,9 +3,12 @@ from .models import RoleHierarchy,User
 
 # Serializers
 class RoleHierarchySerializer(serializers.ModelSerializer):
+    created_by = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = RoleHierarchy
-        fields = ['id', 'role', 'level']
+        fields = ['id', 'role', 'level', 'created_by', 'description']
+
 
 class UserSerializer(serializers.ModelSerializer):
     role_display = serializers.SerializerMethodField()

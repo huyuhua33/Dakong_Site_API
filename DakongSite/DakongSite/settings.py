@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # BASE_DIR = os.path.join('','/')
 
 # Load Global env
-env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
-load_dotenv(env_path)
+env_path = load_dotenv()
+
 
 
 # Quick-start development settings - unsuitable for production

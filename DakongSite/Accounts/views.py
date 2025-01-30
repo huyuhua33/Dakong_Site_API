@@ -14,6 +14,10 @@ class RoleHierarchyViewSet(ModelViewSet):
     serializer_class = RoleHierarchySerializer
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        """Assign the logged-in user as the creator of the role."""
+        serializer.save(created_by=self.request.user)
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.prefetch_related('roles').all()
     serializer_class = UserSerializer

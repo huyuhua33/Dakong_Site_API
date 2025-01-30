@@ -4,20 +4,24 @@ from .userRole import RoleChoices
 import uuid
 
 
-
 # Helper function to generate prefixed UUID
 def generate_prefixed_uuid():
     return f"AC{uuid.uuid4()}"
 
 # Models
 class RoleHierarchy(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     role = models.CharField(
         max_length=50,
-        choices=RoleChoices.choices,
-        default=RoleChoices.GUEST,
-        unique=True
+        default="CustomRole",  # Default name for custom roles
+        unique=False
     )
-    level = models.PositiveIntegerField(unique=True)
+    level = models.PositiveIntegerField()
+    created_by = models.ForeignKey(
+        'User', on_delete=models.CASCADE, null=True, blank=True, related_name='created_roles'
+    )
+    description = models.TextField(blank=True, null=True)  # Allow personal description of the role
+
 
     class Meta:
         ordering = ['level']
@@ -45,10 +49,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-    class Meta:
-        db_table = 'Accounts_user'
 
     def has_permission_level(self, required_role):
         """Check hierarchical role permissions"""
         return any(role.level >= required_role.level for role in self.roles.all())
-

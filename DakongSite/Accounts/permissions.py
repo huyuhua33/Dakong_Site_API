@@ -24,3 +24,4 @@ def role_required(required_role):
             return view_func(self, request, *args, **kwargs)
         return _wrapped_view
     return decorator
+
