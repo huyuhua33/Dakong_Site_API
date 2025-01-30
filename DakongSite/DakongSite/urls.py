@@ -26,6 +26,10 @@ urlpatterns = [
 # add appliaction
 urlpatterns += [
     path('api/website/', include('WebSite.urls')),
+<<<<<<< HEAD
+=======
+    # path('api/account/', include('Accounts.urls')),
+>>>>>>> c33e8cb3c1d059913dfa5ec2e988ed4898fd0731
     path('api/news/', include('News.urls')),
     path('api/products/', include('Products.urls')),
     path('api/media/', include('Media.urls')),
