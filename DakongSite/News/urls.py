@@ -12,5 +12,5 @@ router.register(r'news', NewsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('ckeditor/', include('ckeditor_uploader.urls')),  # CKEditor 文件上傳
+    path('ckeditor5/', include('django_ckeditor_5.urls')),  # CKEditor 文件上傳
 ]

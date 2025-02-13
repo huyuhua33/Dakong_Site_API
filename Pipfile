@@ -13,7 +13,6 @@ drf-yasg = "==1.21.8"
 django-parler-rest = "==2.2"
 django-filter = "==24.3"
 django-extensions = "==3.2.3"
-django-ckeditor = "==6.7.2"
 djangorestframework-simplejwt = "==5.3.1"
 django-ckeditor-5 = "==0.2.15"
 asgiref = "==3.8.1"
@@ -27,6 +26,10 @@ sqlparse = "==0.5.3"
 typing-extensions = "==4.12.2"
 tzdata = "==2024.2"
 uritemplate = "==4.1.1"
+pytest = "*"
+pytest-django = "*"
+django-test-plus = "*"
+coverage = "*"
 
 [dev-packages]
 

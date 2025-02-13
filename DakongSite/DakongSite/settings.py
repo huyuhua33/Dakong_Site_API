@@ -53,8 +53,7 @@ INSTALLED_APPS = [
     'django_filters', # ADD for default form 
     'parler',  # For multilingual support
     'rest_framework',  # For RESTful API support
-    'ckeditor', # For RichText support
-    'ckeditor_uploader',  # For RichText support picture
+    'django_ckeditor_5', # For RichText support
     'drf_yasg', # For Swagger support
     'corsheaders', # For CORS support
     'WebSite',
@@ -204,6 +203,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads' / 'media' 
 
 CKEDITOR_UPLOAD_PATH = 'CKEditor'  # 圖片上傳路徑
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload'],
+        'height': '300px',
+        'width': '100%',
+    },
+}
+
 
 
 # Default primary key field type

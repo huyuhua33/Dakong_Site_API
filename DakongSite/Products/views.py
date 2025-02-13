@@ -1,16 +1,18 @@
-# Products/views.py
-from django.views.generic import ListView, DetailView
-from .models import Product,ProductImage
 from rest_framework.viewsets import ModelViewSet
-from .serializers import ProductSerializer,ProductImageSerializer
+from .models import Product, ProductImage,Category
+from .serializers import ProductSerializer, ProductImageSerializer,CategorySerializer
 from rest_framework.permissions import IsAuthenticated
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.prefetch_related('images').all()
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
-    
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
 class ProductImageViewSet(ModelViewSet):
-    queryset = Product.objects.prefetch_related('translations').all()
+    queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
     permission_classes = [IsAuthenticated]
