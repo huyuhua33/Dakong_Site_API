@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django_ckeditor_5', # For RichText support
     'drf_yasg', # For Swagger support
     'corsheaders', # For CORS support
+    "mptt", # For tree structure support
+    "django_mptt_admin", # For tree structure support admin
     'WebSite',
     'Accounts',
     'News',

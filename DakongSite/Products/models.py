@@ -1,27 +1,29 @@
-from django.db import models
-from parler.models import TranslatableModel, TranslatedFields
-import uuid
 from django.utils.translation import gettext_lazy as _
+
+# model.py
+from django.db import models
+import uuid
+from django.utils.text import slugify
+from parler.models import TranslatableModel, TranslatedFields
 
 class Category(TranslatableModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     translations = TranslatedFields(
-        name=models.CharField(_("Category Name"), max_length=255),
-        description=models.TextField(_("Description"), blank=True, null=True)
+        name=models.CharField(max_length=255),
+        slug=models.SlugField(max_length=255, unique=True, blank=True, null=True)  # 允許翻譯 slug
     )
-    parent = models.ForeignKey(
-        'self', on_delete=models.CASCADE, related_name='subcategories',
-        blank=True, null=True, verbose_name=_("Parent Category")
-    )
-    slug = models.SlugField(unique=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
-    class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name, allow_unicode=True)  # 允許 Unicode slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
-    
+
+
+
 # Models
 class Product(TranslatableModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -30,7 +32,7 @@ class Product(TranslatableModel):
         description=models.TextField(blank=True, null=True)
     )
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2,default=0)
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -65,3 +67,49 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.product.safe_translation_getter('name', any_language=True) or 'Unnamed Product'}"
+    
+
+# # 定義 QuerySet 來支援 Parler 和 MPTT
+# from mptt.querysets import TreeQuerySet
+
+# class CategoryQuerySet(TranslatableQuerySet, TreeQuerySet):
+#     """ 確保 QuerySet 同時支援 MPTT 與 Parler """
+#     pass
+
+# # 定義 Manager 來管理 QuerySet
+# from mptt.managers import TreeManager
+
+# class CategoryManager(TreeManager, TranslatableManager):
+#     """ 讓 Manager 使用自訂 QuerySet """
+#     _queryset_class = CategoryQuerySet
+
+#     def get_queryset(self):
+#         """ 確保使用自訂的 QuerySet """
+#         return self._queryset_class(self.model, using=self._db)
+
+# # Category 模型
+# class Category(MPTTModel, TranslatableModel):
+#     objects = CategoryManager()
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+#     translations = TranslatedFields(
+#         name=models.CharField(_("Category Name"), max_length=255),
+#         description=models.TextField(_("Description"), blank=True, null=True)
+#     )
+#     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+#     slug = models.SlugField(unique=True)
+#     lft = models.PositiveIntegerField(default=0)
+#     rght = models.PositiveIntegerField(default=0)
+#     tree_id = models.PositiveIntegerField(default=0)
+#     level = models.PositiveIntegerField(default=0)
+
+#     objects = CategoryManager()  # 設定 Manager 為自訂的
+
+#     class MPTTMeta:
+#         order_insertion_by = ['id']
+
+#     class Meta:
+#         verbose_name = _( "Category")
+#         verbose_name_plural = _( "Categories")
+
+#     def __str__(self):
+#         return self.safe_translation_getter("name", any_language=True) or "Unnamed Category"
